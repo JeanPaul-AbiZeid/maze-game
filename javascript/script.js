@@ -5,7 +5,7 @@ window.addEventListener("load", function(){
     var startBtn = document.getElementById("start");
     var endBtn = document.getElementById("end");
     var textBox = document.getElementById("status");
-    
+    var scoreString = document.getElementsByClassName("example")
     
 
     function changeText(string, change){
@@ -15,6 +15,7 @@ window.addEventListener("load", function(){
 
     startBtn.addEventListener("click", function(){
         var toggle = true;
+        scoreString[0].innerHTML = "Your Score:" + score;
         console.log(score);
         for (var i = 0; i < button.length; i++) {   //changing the color on touching the borders
             button[i].addEventListener("mouseover", function(){
@@ -24,6 +25,7 @@ window.addEventListener("load", function(){
                 changeText("status", "You Lost");
                 toggle = false;
                 score += -10;
+                scoreString[0].innerHTML = "Your Score:" + score;
                 console.log(score);
             });
         };
@@ -41,7 +43,8 @@ window.addEventListener("load", function(){
             if (toggle == true){
             changeText("status", "You Won");
             score += 5;
-            toggle = false;  //to increase the score one time
+            scoreString[0].innerHTML = "Your Score:" + score;
+            toggle = false;  //to increase the score once per path
             console.log(score);
             }
         })
