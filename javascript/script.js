@@ -2,18 +2,18 @@ window.addEventListener("load", function(){
     //initializing score
     var score = 0; 
     var button = document.getElementsByClassName("boundary");
-    console.log(button);
+    var startBtn = document.getElementById("start");
 
-    function mouse_over(item){
-    item.style.background = "red";
-    };
+    startBtn.addEventListener("click", function(){
+        for (var i = 0; i < button.length; i++) {
+            button[i].addEventListener("mouseover", function(){
+                for (var j = 0; j < button.length; j++) {
+                    button[j].style.background = "red";
+                }
+            });
+        };
+    })
+    
 
-
-    for (var i = 0; i < button.length; i++) {
-        button[i].addEventListener("mouseover", function(){
-            for (var j = 0; j < button.length; j++) {
-                button[j].style.background = "red";
-            }
-        });
-    };
+    
 })
