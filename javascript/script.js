@@ -5,14 +5,14 @@ window.addEventListener("load", function(){
     console.log(button);
 
     function mouse_over(item){
-    item.style.border= "1px red solid";
+    item.style.background = "red";
     };
 
 
     for (var i = 0; i < button.length; i++) {
         button[i].addEventListener("mouseover", function(){
             for (var j = 0; j < button.length; j++) {
-                button[j].style.border= "1px red solid";
+                button[j].style.background = "red";
             }
         });
     };
