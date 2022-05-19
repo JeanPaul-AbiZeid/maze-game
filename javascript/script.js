@@ -5,7 +5,8 @@ window.addEventListener("load", function(){
     var startBtn = document.getElementById("start");
     var endBtn = document.getElementById("end");
     var textBox = document.getElementById("status");
-    var toggle = true;
+    
+    
 
     function changeText(string, change){
         //changing text
@@ -13,7 +14,7 @@ window.addEventListener("load", function(){
     }
 
     startBtn.addEventListener("click", function(){
-
+        var toggle = true;
         console.log(score);
         for (var i = 0; i < button.length; i++) {   //changing the color on touching the borders
             button[i].addEventListener("mouseover", function(){
@@ -22,7 +23,6 @@ window.addEventListener("load", function(){
                 }
                 changeText("status", "You Lost");
                 toggle = false;
-                console.log(toggle)
                 score += -10;
                 console.log(score);
             });
@@ -34,18 +34,17 @@ window.addEventListener("load", function(){
                 button[j].style.background = "#eeeeee";
             }
             toggle = true;
-            console.log(toggle)
             });
 
         
         endBtn.addEventListener("mouseover", function(){   //finishing the maze
             if (toggle == true){
             changeText("status", "You Won");
-            console.log(toggle)
             score += 5;
+            toggle = false;  //to increase the score one time
             console.log(score);
             }
-        })            
+        })
     })
     
 })
