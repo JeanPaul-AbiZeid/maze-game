@@ -1,6 +1,7 @@
 window.addEventListener("load", function(){
     //initializing score
-    var score = 0; 
+    var score = 0;
+    var counter = 0;
     var button = document.getElementsByClassName("boundary");
     var startBtn = document.getElementById("start");
     var endBtn = document.getElementById("end");
@@ -48,19 +49,28 @@ window.addEventListener("load", function(){
     }
 
     startBtn.addEventListener("click", function(){
-        var toggle = true;
+        counter += 1;
 
-        scoreString[0].innerHTML = "Your Score:" + score; //displaying the score
+        if (counter === 1){
+            var toggle = true;
 
-        leave.addEventListener("mouseleave", alertFunction);    //penelty for leaving the border of th game
-        
-        for (var i = 0; i < button.length; i++) {   //changing the color on touching the borders
-            button[i].addEventListener("mouseover", borderTouch)
-        };
+            scoreString[0].innerHTML = "Your Score:" + score; //displaying the score
 
-        start.addEventListener("mouseover", startAgain) ;   //resetting the color on touching the start button
+            leave.addEventListener("mouseleave", alertFunction);    //penelty for leaving the border of th game
+            
+            for (var i = 0; i < button.length; i++) {   //changing the color on touching the borders
+                button[i].addEventListener("mouseover", borderTouch)
+            };
 
-        endBtn.addEventListener("mouseover", finish)   //finishing the maze  
+            start.addEventListener("mouseover", startAgain) ;   //resetting the color on touching the start button
+
+            endBtn.addEventListener("mouseover", finish)   //finishing the maze 
+        }
+        else {
+            score = 0;
+            scoreString[0].innerHTML = "Your Score:" + score;
+            changeText("status", "Begin by moving your mouse over the S.");
+        } 
     })
     
 })
