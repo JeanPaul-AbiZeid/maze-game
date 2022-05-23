@@ -58,9 +58,21 @@ window.addEventListener("load", function(){
     }
 
     function alertFunction() {
-        alert("Attempt of cheating, you will get -10 score.")
-        score += -10;
+        reset_timer();
+        last.innerHTML ="00:00";
+        best.innerHTML = "00:00";
+        alert("Attempt of cheating, please press the S button again.")
+        score = 0;
         scoreString[0].innerHTML = "Your Score:" + score; //displaying the score
+
+        //removing event listners
+        start.removeEventListener("mouseover", startAgain);
+        leave.removeEventListener("mouseleave", alertFunction);
+        endBtn.removeEventListener("mouseover", finish)
+        for (var i = 0; i < button.length; i++) {   
+            button[i].removeEventListener("mouseover", borderTouch)
+        };
+        
     };
 
     function borderTouch(){
@@ -70,7 +82,7 @@ window.addEventListener("load", function(){
         //resetting time
         reset_timer();
 
-        changeText("status", "You Lost, go back to start to score more");
+        changeText("status", "You Lost, go back to start from the same path to score more");
         toggle = false;
         score += -10;
         scoreString[0].innerHTML = "Your Score:" + score; //displaying the score
@@ -88,6 +100,7 @@ window.addEventListener("load", function(){
 
     function finish (){
         if (toggle == true){
+            clearInterval(Interval);
             changeText("status", "You Won, go back to start to score more");
             score += 5;
             scoreString[0].innerHTML = "Your Score:" + score;  //displaying the score
@@ -100,15 +113,16 @@ window.addEventListener("load", function(){
                 reset_timer();
             }
             else{
-                last.innerHTML = seconds + ":" + tens;
-                if(best_seconds > seconds){
-                    best.innerHTML = seconds + ":" + tens;
-                    reset_timer();
+                var current_tens = tens;
+                var current_seconds = seconds;
+                reset_timer();
+                last.innerHTML = current_seconds + ":" + current_tens;
+                if(best_seconds > current_seconds){
+                    best.innerHTML = current_seconds + ":" + current_tens;
                 }
-                else if(best_seconds == seconds){
-                    if(best_tens > tens){
-                        best.innerHTML = seconds + ":" + tens;
-                        reset_timer();
+                else if(best_seconds == current_seconds){
+                    if(best_tens > current_tens){
+                        best.innerHTML = current_seconds + ":" + current_tens;
                     }
                 }
             }
