@@ -9,6 +9,12 @@ window.addEventListener("load", function(){
     var scoreString = document.getElementsByClassName("example");
     var leave = document.getElementById("game");
     
+    //stats variables
+    var seconds = 00;
+    var tens = 00;
+    var outputSeconds = document.getElementById("second");
+    var outputTens = document.getElementById("tens");
+    var interval;
 
     function changeText(string, change){
         //changing text
