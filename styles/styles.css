@@ -3,13 +3,20 @@ Game Lab CSS file
 You don't need to download or edit this file.
 */
 
-h1, h2 {
+h1, h2, h3 {
 	text-align: center;
 }
 
 p {
 	width: 600px;
 	margin: 1em auto;
+}
+
+#stats {
+	display: flex;
+	justify-content: space-around;
+	margin-left: 20%;
+	margin-right: 20%;
 }
 
 #game {
