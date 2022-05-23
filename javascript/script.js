@@ -1,19 +1,23 @@
 window.addEventListener("load", function(){
     //initializing score
     var score = 0;
-    var counter = 0;
+    var counter = 1;
     var button = document.getElementsByClassName("boundary");
     var startBtn = document.getElementById("start");
     var endBtn = document.getElementById("end");
     var textBox = document.getElementById("status");
     var scoreString = document.getElementsByClassName("example");
     var leave = document.getElementById("game");
-    
+    var last = document.getElementById("last");
+    var best = document.getElementById("best");
+
     //stats variables
     var seconds = 00;
     var tens = 00;
     var outputSeconds = document.getElementById("seconds");
     var outputTens = document.getElementById("tens");
+    var best_tens;
+    var best_seconds;
     var Interval;
 
     function startTimer () {
@@ -78,24 +82,47 @@ window.addEventListener("load", function(){
             button[j].style.background = "#eeeeee";
         }
         Interval = setInterval(startTimer, 10);
+        counter++;
         toggle = true;
     }
 
     function finish (){
         if (toggle == true){
-            clearInterval(Interval);
             changeText("status", "You Won, go back to start to score more");
             score += 5;
             scoreString[0].innerHTML = "Your Score:" + score;  //displaying the score
             toggle = false;  //to increase the score once per path
+            if(counter == 1){
+                best.innerHTML = seconds + ":" + tens;
+                best_tens = tens;
+                best_seconds = seconds;
+                last.innerHTML = seconds + ":" + tens;
+                reset_timer();
+            }
+            else{
+                last.innerHTML = seconds + ":" + tens;
+                if(best_seconds > seconds){
+                    best.innerHTML = seconds + ":" + tens;
+                    reset_timer();
+                }
+                else if(best_seconds == seconds){
+                    if(best_tens > tens){
+                        best.innerHTML = seconds + ":" + tens;
+                        reset_timer();
+                    }
+                }
+            }
         }
     }
 
     function start_button_click(){
         toggle = true;
         reset_timer();
+        last.innerHTML ="00:00";
+        best.innerHTML = "00:00";
         Interval = setInterval(startTimer, 10);
         score = 0;
+        counter = 1;
         scoreString[0].innerHTML = "Your Score:" + score; //displaying the score
 
         leave.addEventListener("mouseleave", alertFunction);    //penelty for leaving the border of th game
