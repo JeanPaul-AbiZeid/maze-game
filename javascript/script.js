@@ -55,6 +55,11 @@ window.addEventListener("load", function(){
         for (var j = 0; j < button.length; j++) {
             button[j].style.background = "#ff8888";
         }
+        clearInterval(Interval);
+        tens = "00";  
+        seconds = "00";
+        outputTens.innerHTML = tens;
+        outputSeconds.innerHTML = seconds;
         changeText("status", "You Lost, go back to start to score more");
         toggle = false;
         score += -10;
