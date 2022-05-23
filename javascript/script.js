@@ -12,9 +12,33 @@ window.addEventListener("load", function(){
     //stats variables
     var seconds = 00;
     var tens = 00;
-    var outputSeconds = document.getElementById("second");
+    var outputSeconds = document.getElementById("seconds");
     var outputTens = document.getElementById("tens");
-    var interval;
+    var Interval;
+
+    function startTimer () {
+        tens++; 
+        
+        if(tens <= 9){
+          outputTens.innerHTML = "0" + tens;
+        }
+        
+        if (tens > 9){
+          outputTens.innerHTML = tens;
+        } 
+        
+        if (tens > 99) {
+          seconds++;
+          outputSeconds.innerHTML = "0" + seconds;
+          tens = 0;
+          outputTens.innerHTML = "0" + 0;
+        }
+        
+        if (seconds > 9){
+          outputSeconds.innerHTML = seconds;
+        }
+      
+    }
 
     function changeText(string, change){
         //changing text
@@ -60,6 +84,8 @@ window.addEventListener("load", function(){
         if (counter === 1){
             var toggle = true;
 
+            // clearInterval(Interval);
+            Interval = setInterval(startTimer, 10);
             scoreString[0].innerHTML = "Your Score:" + score; //displaying the score
 
             leave.addEventListener("mouseleave", alertFunction);    //penelty for leaving the border of th game
@@ -73,6 +99,13 @@ window.addEventListener("load", function(){
             endBtn.addEventListener("mouseover", finish)   //finishing the maze 
         }
         else {
+            //resetting time
+            clearInterval(Interval);
+            tens = "00";  
+            seconds = "00";
+            outputTens.innerHTML = tens;
+            outputSeconds.innerHTML = seconds;
+            //resetting score
             score = 0;
             scoreString[0].innerHTML = "Your Score:" + score;
             changeText("status", "Begin by moving your mouse over the S.");
