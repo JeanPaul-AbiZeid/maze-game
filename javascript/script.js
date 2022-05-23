@@ -40,6 +40,14 @@ window.addEventListener("load", function(){
       
     }
 
+    function reset_timer (){
+        clearInterval(Interval);
+        tens = "00";  
+        seconds = "00";
+        outputTens.innerHTML = tens;
+        outputSeconds.innerHTML = seconds;
+    }
+
     function changeText(string, change){
         //changing text
         document.getElementById(string).innerHTML = change;
@@ -55,11 +63,9 @@ window.addEventListener("load", function(){
         for (var j = 0; j < button.length; j++) {
             button[j].style.background = "#ff8888";
         }
-        clearInterval(Interval);
-        tens = "00";  
-        seconds = "00";
-        outputTens.innerHTML = tens;
-        outputSeconds.innerHTML = seconds;
+        //resetting time
+        reset_timer();
+
         changeText("status", "You Lost, go back to start to score more");
         toggle = false;
         score += -10;
@@ -77,44 +83,32 @@ window.addEventListener("load", function(){
 
     function finish (){
         if (toggle == true){
+            clearInterval(Interval);
             changeText("status", "You Won, go back to start to score more");
             score += 5;
             scoreString[0].innerHTML = "Your Score:" + score;  //displaying the score
             toggle = false;  //to increase the score once per path
-            }
+        }
     }
 
-    startBtn.addEventListener("click", function(){
-        counter += 1;
+    function start_button_click(){
+        toggle = true;
+        reset_timer();
+        Interval = setInterval(startTimer, 10);
+        score = 0;
+        scoreString[0].innerHTML = "Your Score:" + score; //displaying the score
 
-        if (counter === 1){
-            var toggle = true;
+        leave.addEventListener("mouseleave", alertFunction);    //penelty for leaving the border of th game
+        
+        for (var i = 0; i < button.length; i++) {   //changing the color on touching the borders
+            button[i].addEventListener("mouseover", borderTouch)
+        };
 
-            Interval = setInterval(startTimer, 10);
-            scoreString[0].innerHTML = "Your Score:" + score; //displaying the score
+        start.addEventListener("mouseover", startAgain) ;   //resetting the color on touching the start button
 
-            leave.addEventListener("mouseleave", alertFunction);    //penelty for leaving the border of th game
-            
-            for (var i = 0; i < button.length; i++) {   //changing the color on touching the borders
-                button[i].addEventListener("mouseover", borderTouch)
-            };
+        endBtn.addEventListener("mouseover", finish)   //finishing the maze 
+    }
 
-            start.addEventListener("mouseover", startAgain) ;   //resetting the color on touching the start button
-
-            endBtn.addEventListener("mouseover", finish)   //finishing the maze 
-        }
-        else {
-            //resetting time
-            clearInterval(Interval);
-            tens = "00";  
-            seconds = "00";
-            outputTens.innerHTML = tens;
-            outputSeconds.innerHTML = seconds;
-            //resetting score
-            score = 0;
-            scoreString[0].innerHTML = "Your Score:" + score;
-            changeText("status", "Begin by moving your mouse over the S.");
-        } 
-    })
+    startBtn.addEventListener("click", start_button_click)
     
 })
