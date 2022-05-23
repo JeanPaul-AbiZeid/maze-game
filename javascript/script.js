@@ -68,10 +68,11 @@ window.addEventListener("load", function(){
 
     function startAgain (){
         changeText("status", "Again");
-            for (var j = 0; j < button.length; j++) {
-                button[j].style.background = "#eeeeee";
-            }
-            toggle = true;
+        for (var j = 0; j < button.length; j++) {
+            button[j].style.background = "#eeeeee";
+        }
+        Interval = setInterval(startTimer, 10);
+        toggle = true;
     }
 
     function finish (){
@@ -89,7 +90,6 @@ window.addEventListener("load", function(){
         if (counter === 1){
             var toggle = true;
 
-            // clearInterval(Interval);
             Interval = setInterval(startTimer, 10);
             scoreString[0].innerHTML = "Your Score:" + score; //displaying the score
 
